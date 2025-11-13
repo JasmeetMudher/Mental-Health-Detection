@@ -8,7 +8,7 @@ const Footer = () => (
     </div>
     <div className="flex gap-2 pt-2">
   <img src="/pulse.svg" alt="Logo" className="w-6 h-6" />
-      <span className="text-xs">Made with ❤️ for mental health awareness</span>
+      <span className="text-xs">Made for mental health awareness</span>
     </div>
   </footer>
 );

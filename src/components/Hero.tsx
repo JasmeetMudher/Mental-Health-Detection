@@ -13,26 +13,22 @@ export const Hero = () => {
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mt-8">
             <Activity className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">AI-Powered Mental Health Analysis</span>
+            <span className="text-sm font-medium text-primary">Mental Health Analysis</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
             Understanding
             <span className="bg-gradient-calm bg-clip-text text-transparent"> Reddit's Sentiment </span>
-            with AI
+            with Machine Learning
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
             Analyze mental health discussions from Reddit using advanced machine learning to understand community sentiment patterns.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 justify-center">
             <div className="rounded-xl bg-card p-6 shadow-lg border border-muted">
               <h3 className="text-lg font-semibold mb-2 text-primary">Real-Time Sentiment Analysis</h3>
-              <p className="text-muted-foreground">Get instant insights into Reddit posts using AI-powered models.</p>
-            </div>
-            <div className="rounded-xl bg-card p-6 shadow-lg border border-muted">
-              <h3 className="text-lg font-semibold mb-2 text-primary">Bookmark & History</h3>
-              <p className="text-muted-foreground">Save your favorite analyses and revisit your history anytime.</p>
+              <p className="text-muted-foreground">Get instant insights into Reddit posts using ML models.</p>
             </div>
             <div className="rounded-xl bg-card p-6 shadow-lg border border-muted">
               <h3 className="text-lg font-semibold mb-2 text-primary">Community Trends</h3>
