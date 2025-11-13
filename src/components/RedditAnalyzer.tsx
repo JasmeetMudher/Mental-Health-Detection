@@ -125,7 +125,7 @@ export const RedditAnalyzer = () => {
       setPosts(fetchedPosts);
       toast.success("Posts fetched!");
       // Analyze each post's text using Gradio
-      const client = await Client.connect("https://e1bf765dec8bafe879.gradio.live/");
+      const client = await Client.connect("https://e279a2c9138c9a06c2.gradio.live/");
       const analyses: string[] = [];
       for (const post of fetchedPosts) {
         const text = post.selftext || post.title || "";
@@ -426,7 +426,14 @@ export const RedditAnalyzer = () => {
                             </div>
                             <div className="text-muted-foreground text-sm mb-3 flex items-center gap-2">
                               <span className="font-medium">by</span>
-                              <span className="text-primary font-semibold">{post.author}</span>
+                              <a
+                                href={`https://www.reddit.com/user/${post.author}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary font-semibold hover:underline"
+                              >
+                                {post.author}
+                              </a>
                               <span className="text-muted-foreground/60">•</span>
                               <span>{new Date(post.created_utc * 1000).toLocaleDateString()}</span>
                             </div>
@@ -470,9 +477,26 @@ export const RedditAnalyzer = () => {
                             <h4 className="font-bold mb-3 text-primary flex items-center gap-2">
                               🧠 Analysis Result
                             </h4>
-                            <pre className="whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">
-                              {analysis[idx]}
-                            </pre>
+                              <pre className="whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">
+                                {(() => {
+                                  // Remove 'cleaned text', asterisks, and leading gap from analysis result
+                                  let result = analysis[idx] || "";
+                                  // Remove lines containing 'cleaned text'
+                                  result = result
+                                    .split('\n')
+                                    .filter(line => !/cleaned text/i.test(line))
+                                    .join('\n');
+                                  // Remove all asterisks
+                                  result = result.replace(/\*/g, "");
+                                  // Remove leading whitespace/gap
+                                  // Remove leading whitespace/gap for all lines (including confidence/probabilities)
+                                  result = result
+                                    .split('\n')
+                                    .map(line => line.replace(/^\s+/, ""))
+                                    .join('\n');
+                                  return result;
+                                })()}
+                              </pre>
                           </div>
                         )}
                       </div>
@@ -492,7 +516,18 @@ export const RedditAnalyzer = () => {
                 <DialogHeader>
                   <DialogTitle>{selectedPost?.title}</DialogTitle>
                   <DialogDescription>
-                    <div className="text-muted-foreground text-sm mb-2">by {selectedPost?.author}</div>
+                    <div className="text-muted-foreground text-sm mb-2">
+                      by {selectedPost?.author && (
+                        <a
+                          href={`https://www.reddit.com/user/${selectedPost.author}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary font-semibold hover:underline"
+                        >
+                          {selectedPost.author}
+                        </a>
+                      )}
+                    </div>
                     {selectedPost?.selftext && <div className="mb-2 whitespace-pre-line">{selectedPost.selftext}</div>}
                     {selectedPost?.url && (
                       <a href={selectedPost.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline flex items-center gap-1">
