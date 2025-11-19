@@ -71,7 +71,7 @@ export type Database = {
         }
         Relationships: []
       }
-      profiles: {
+  profiles: {
         Row: {
           avatar_url: string | null
           created_at: string
@@ -97,6 +97,27 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      ,
+      contacted_users: {
+        Row: {
+          id: string;
+          reddit_username: string;
+          contacted_at: string;
+          doctor_id: string;
+          notes: string;
+        };
+        Insert: {
+          reddit_username: string;
+          doctor_id?: string;
+          notes?: string;
+        };
+        Update: {
+          reddit_username?: string;
+          doctor_id?: string;
+          notes?: string;
+        };
+        Relationships: [];
       }
     }
     Views: {
