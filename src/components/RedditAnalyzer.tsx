@@ -125,7 +125,7 @@ export const RedditAnalyzer = () => {
       setPosts(fetchedPosts);
       toast.success("Posts fetched!");
       // Analyze each post's text using Gradio
-      const client = await Client.connect("https://e279a2c9138c9a06c2.gradio.live/");
+      const client = await Client.connect("https://5d667348883207df5d.gradio.live/");
       const analyses: string[] = [];
       for (const post of fetchedPosts) {
         const text = post.selftext || post.title || "";
@@ -467,6 +467,31 @@ export const RedditAnalyzer = () => {
                                 className="text-muted-foreground hover:text-primary transition-colors"
                               >
                                 Save
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="text-primary border-primary/40 hover:bg-primary/10"
+                                onClick={async () => {
+                                  const { data: userData } = await supabase.auth.getUser();
+                                  const doctor_id = userData?.user?.id || "";
+                                  const { error } = await supabase
+                                    .from("contacted_users")
+                                    .insert([
+                                      {
+                                        reddit_username: post.author,
+                                        doctor_id,
+                                        notes: "Contacted from RedditAnalyzer",
+                                      },
+                                    ]);
+                                  if (!error) {
+                                    toast.success(`Added ${post.author} to Contacted Users!`);
+                                  } else {
+                                    toast.error("Failed to add user");
+                                  }
+                                }}
+                              >
+                                Mark as Contacted
                               </Button>
                             </div>
                           </div>

@@ -34,7 +34,8 @@ const Header = () => {
   <nav className="flex gap-8 items-center">
         <Link to="/" className="hover:text-primary transition">Home</Link>
         <Link to="/analyze" className="hover:text-primary transition">Analyze</Link>
-        <Link to="/about" className="hover:text-primary transition">About</Link>
+  <Link to="/about" className="hover:text-primary transition">About</Link>
+  <Link to="/contacted-users" className="hover:text-primary transition">Contacted Users</Link>
         <ProfileAvatar />
         <Button variant="outline" onClick={handleSignOut} size="sm">
           <LogOut className="mr-2 h-4 w-4" />
